@@ -1,6 +1,7 @@
-from helmet.logger import logging
-from helmet.exception import HelmetException
 import sys
+
+from helmet.exception import HelmetException
+from helmet.logger import logging
 
 logging.info("Welcome to this project")
 
