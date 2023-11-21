@@ -7,7 +7,7 @@ TIMESTAMP: str = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
 
 # Data Ingestion Constants
 ARTIFACTS_DIR = os.path.join("artifacts", TIMESTAMP)
-BUCKET_NAME = "helmet-object-detection"
+BUCKET_NAME = "helmet-object-detection-20112023"
 ZIP_FILE_NAME = "data.zip"
 ANNOTATIONS_COCO_JSON_FILE = "_annotations.coco.json"
 

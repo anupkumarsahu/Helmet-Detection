@@ -1,18 +1,17 @@
-import os
 import sys
 from zipfile import ZipFile
 
-from helmet.entity.config_entity import DataIngestionConfig
+from helmet.configuration.s3_operations import S3Operation
+from helmet.constants import *
 from helmet.entity.artifacts_entity import DataIngestionArtifacts
-from helmet.configuration.s3_operations import S3Operations
+from helmet.entity.config_entity import DataIngestionConfig
 from helmet.exception import HelmetException
 from helmet.logger import logging
-from helmet.constants import *
 
 
 class DataIngestion:
     def __init__(
-        self, data_ingestion_config: DataIngestionConfig, s3_operations: S3Operations
+        self, data_ingestion_config: DataIngestionConfig, s3_operations: S3Operation
     ):
         self.data_ingestion_config = data_ingestion_config
         self.s3_operations = s3_operations

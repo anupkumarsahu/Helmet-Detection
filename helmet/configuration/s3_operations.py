@@ -17,21 +17,15 @@ class S3Operation:
 
     def __init__(self):
         if S3Operation.s3_resource == None or S3Operation.s3_client == None:
-            __access_key_id = os.getenv(
-                AWS_ACCESS_KEY_ID_ENV_KEY,
-            )
-            __secret_access_key = os.getenv(
-                AWS_SECRET_ACCESS_KEY_ENV_KEY,
-            )
+            __access_key_id = os.getenv(AWS_ACCESS_KEY_ID_ENV_KEY,)
+            __secret_access_key = os.getenv(AWS_SECRET_ACCESS_KEY_ENV_KEY,)
 
             if __access_key_id is None:
                 raise Exception(
-                    f"Environment variable: {AWS_ACCESS_KEY_ID_ENV_KEY} is not set"
-                )
+                    f"Environment variable: {AWS_ACCESS_KEY_ID_ENV_KEY} is not set")
             if __secret_access_key is None:
                 raise Exception(
-                    f"Environment variable: {AWS_SECRET_ACCESS_KEY_ENV_KEY} is not set"
-                )
+                    f"Environment variable: {AWS_SECRET_ACCESS_KEY_ENV_KEY} is not set")
 
             S3Operation.s3_resource = boto3.resource(
                 "s3",
@@ -63,7 +57,7 @@ class S3Operation:
 
         Version     :   1.2
         Revisions   :   moved setup to cloud
-        """        
+        """
         logging.info("Enter the read_object method of S3Operations class")
 
         try:
@@ -72,9 +66,10 @@ class S3Operation:
                 if decode is True
                 else object_name.get()["Body"].read()
             )
-            conv_func = lambda: StringIO(func()) if make_readable is True else func()
+            def conv_func(): return StringIO(func()) if make_readable is True else func()
 
-            logging.info(f"Exited the read_object method of S3Operations class")
+            logging.info(
+                f"Exited the read_object method of S3Operations class")
 
             return conv_func()
         except Exception as e:
@@ -90,7 +85,7 @@ class S3Operation:
 
         Version     :   1.2
         Revisions   :   moved setup to cloud
-        """        
+        """
         logging.info(f"Entered the get_bucket method of S3Operations class")
 
         try:
@@ -113,16 +108,20 @@ class S3Operation:
 
         Version     :   1.2
         Revisions   :   moved setup to cloud
-        """        
-        logging.info("Entered the get_file_object method of S3Operations class")
+        """
+        logging.info(
+            "Entered the get_file_object method of S3Operations class")
 
         try:
             bucket = self.get_bucket(bucket_name)
-            lst_objs = [object for object in bucket.objects.filter(Prefix=filename)]
-            func = lambda x: x[0] if len(x) == 1 else x
+            lst_objs = [
+                object for object in bucket.objects.filter(Prefix=filename)]
+
+            def func(x): return x[0] if len(x) == 1 else x
             file_objs = func(lst_objs)
 
-            logging.info("Exited the get_file_object method of S3Operations class")
+            logging.info(
+                "Exited the get_file_object method of S3Operations class")
             return file_objs
 
         except Exception as e:
@@ -140,7 +139,7 @@ class S3Operation:
 
         Version     :   1.2
         Revisions   :   moved setup to cloud
-        """        
+        """
         logging.info("Entered the load_model method of S3Operations class")
 
         try:
@@ -172,7 +171,7 @@ class S3Operation:
 
         Version     :   1.2
         Revisions   :   moved setup to cloud
-        """        
+        """
         logging.info("Entered the create_folder method of S3Operations class")
 
         try:
@@ -187,7 +186,8 @@ class S3Operation:
             else:
                 pass
 
-            logging.info("Exited the create_folder method of S3Operations class")
+            logging.info(
+                "Exited the create_folder method of S3Operations class")
 
     def upload_file(
         self,
@@ -205,7 +205,7 @@ class S3Operation:
 
         Version     :   1.2
         Revisions   :   moved setup to cloud
-        """        
+        """
         logging.info("Entered the upload_file method of S3Operations class")
 
         try:
@@ -227,7 +227,8 @@ class S3Operation:
                 logging.info(f"Remove is set to {remove}, deleted the file")
 
             else:
-                logging.info(f"Remove is set to {remove}, not deleted the file")
+                logging.info(
+                    f"Remove is set to {remove}, not deleted the file")
 
             logging.info("Exited the upload_file method of S3Operations class")
 
